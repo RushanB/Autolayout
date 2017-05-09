@@ -18,6 +18,8 @@
 @property (nonatomic, weak) NSLayoutConstraint *framingViewHeightConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *framingViewWidthConstraint;
 
+@property (nonatomic, weak) UIView *purpleBox;
+
 @end
 
 @implementation LPAViewController
@@ -53,7 +55,48 @@
     [self.view addSubview:framingView];
     self.framingView = framingView;
     
+    UIView *purpleBox = [[UIView alloc] initWithFrame:CGRectZero]; //PURPLE
+    purpleBox.translatesAutoresizingMaskIntoConstraints = NO;
+    purpleBox.backgroundColor = [UIColor purpleColor];
+    [self.view addSubview:purpleBox];
+    
+    UIView *redBox = [[UIView alloc] initWithFrame:CGRectZero];   //RED
+    redBox.translatesAutoresizingMaskIntoConstraints = NO;
+    redBox.backgroundColor = [UIColor redColor];
+    [self.framingView addSubview:redBox];
+    
+    UIView *orangeBoxLeft = [[UIView alloc] initWithFrame:CGRectZero];  //ORANGE LEFT
+    orangeBoxLeft.translatesAutoresizingMaskIntoConstraints = NO;
+    orangeBoxLeft.backgroundColor = [UIColor orangeColor];
+    [self.framingView addSubview:orangeBoxLeft];
+    [redBox addSubview:orangeBoxLeft];
+    
+    UIView *orangeBoxRight = [[UIView alloc] initWithFrame:CGRectZero]; //ORANGE RIGHT
+    orangeBoxRight.translatesAutoresizingMaskIntoConstraints = NO;
+    orangeBoxRight.backgroundColor = [UIColor orangeColor];
+    [self.framingView addSubview:orangeBoxRight];
+    [redBox addSubview:orangeBoxRight];
+    
+    UIView *blueBoxTop = [[UIView alloc] initWithFrame:CGRectZero];  //BLUE TOP
+    blueBoxTop.translatesAutoresizingMaskIntoConstraints = NO;
+    blueBoxTop.backgroundColor = [UIColor blueColor];
+    [self.framingView addSubview:blueBoxTop];
+    
+    UIView *blueBoxMiddle = [[UIView alloc] initWithFrame:CGRectZero]; //BLUE MID
+    blueBoxMiddle.translatesAutoresizingMaskIntoConstraints = NO;
+    blueBoxMiddle.backgroundColor = [UIColor blueColor];
+    [self.framingView addSubview:blueBoxMiddle];
+    
+    UIView *blueBoxBottom = [[UIView alloc] initWithFrame:CGRectZero];  //BLUE BOTTOM
+    blueBoxBottom.translatesAutoresizingMaskIntoConstraints = NO;
+    blueBoxBottom.backgroundColor = [UIColor blueColor];
+    [self.framingView addSubview:blueBoxBottom];
+    
+    
+
+    
     NSString *buttonsHorizontalConstraintsFormat = @"|[squareButton(==portraitButton)][portraitButton(==landscapeButton)][landscapeButton]|";
+    
     NSArray *buttonsHorizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:buttonsHorizontalConstraintsFormat
                                                                    options:NSLayoutFormatAlignAllCenterY
                                                                     metrics:nil
@@ -107,8 +150,146 @@
 
     
     // Set up your views and constraints here
+    //PURPLE
+    NSLayoutConstraint *purpleBoxRightMargin = [NSLayoutConstraint constraintWithItem:purpleBox
+                                                                            attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:framingView attribute:NSLayoutAttributeRight multiplier:1.0 constant:-20];
     
+    [self.view addConstraint:purpleBoxRightMargin];
     
+    NSLayoutConstraint *purpleBoxBottomMargin = [NSLayoutConstraint constraintWithItem:purpleBox
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:framingView
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                            multiplier:1.0
+                                                                              constant:-20];
+    
+    [self.view addConstraint:purpleBoxBottomMargin];
+    
+    NSLayoutConstraint *purpleBoxSetWidth = [NSLayoutConstraint constraintWithItem:purpleBox
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:framingView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:305.0/500.0
+                                                                         constant:0];
+    
+    [self.view addConstraint:purpleBoxSetWidth];
+    
+    NSLayoutConstraint *purpleBoxSetHeight = [NSLayoutConstraint constraintWithItem:purpleBox
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1
+                                                                           constant:50];
+    [self.view addConstraint:purpleBoxSetHeight];
+    
+    //ORANGE -left
+    NSLayoutConstraint *orangeBoxLeftSetWidth = [NSLayoutConstraint constraintWithItem:orangeBoxLeft
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:70];
+    [self.view addConstraint:orangeBoxLeftSetWidth];
+    
+    NSLayoutConstraint *orangeBoxLeftSetHeight = [NSLayoutConstraint constraintWithItem:orangeBoxLeft
+                                                                             attribute:NSLayoutAttributeHeight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:nil
+                                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                                            multiplier:1
+                                                                              constant:30];
+    [self.view addConstraint:orangeBoxLeftSetHeight];
+    //ORANGE - right
+    NSLayoutConstraint *orangeBoxRightSetWidth = [NSLayoutConstraint constraintWithItem:orangeBoxRight
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                                              multiplier:1
+                                                                                constant:50];
+    
+    [self.view addConstraint:orangeBoxRightSetWidth];
+    
+    NSLayoutConstraint *orangeBoxRightSetHeight = [NSLayoutConstraint constraintWithItem:orangeBoxRight
+                                                                                attribute:NSLayoutAttributeHeight
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:nil
+                                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                                               multiplier:1
+                                                                                 constant:30];
+    [self.view addConstraint:orangeBoxRightSetHeight];
+    
+    //RED
+    NSLayoutConstraint *redBoxTopMargin = [NSLayoutConstraint constraintWithItem:redBox
+                                                                       attribute:NSLayoutAttributeTopMargin
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.framingView
+                                                                       attribute:NSLayoutAttributeTopMargin
+                                                                      multiplier:1
+                                                                        constant:20];
+    [self.view addConstraint:redBoxTopMargin];
+    
+    NSLayoutConstraint *redBoxRightMargin = [NSLayoutConstraint constraintWithItem:redBox
+                                                                          attribute:NSLayoutAttributeRightMargin
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.framingView
+                                                                          attribute:NSLayoutAttributeRightMargin
+                                                                         multiplier:1
+                                                                           constant:-20];
+    [self.view addConstraint:redBoxRightMargin];
+    
+    //RED AND ORANGE
+    NSLayoutConstraint *redOrangeTop = [NSLayoutConstraint constraintWithItem:orangeBoxLeft
+                                                                       attribute:NSLayoutAttributeTop
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:redBox
+                                                                       attribute:NSLayoutAttributeTop
+                                                                      multiplier:1
+                                                                        constant:8];
+    [self.view addConstraint:redOrangeTop];
+    
+    NSLayoutConstraint *redOrangeRight = [NSLayoutConstraint constraintWithItem:orangeBoxRight
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:orangeBoxLeft
+                                                                      attribute:NSLayoutAttributeRight
+                                                                     multiplier:1
+                                                                       constant:8];
+    [self.view addConstraint:redOrangeRight];
+    
+    NSLayoutConstraint *orangeRedLeft = [NSLayoutConstraint constraintWithItem:redBox
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:orangeBoxLeft
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                    multiplier:1
+                                                                      constant:-8];
+    [self.view addConstraint:orangeRedLeft];
+    
+    NSLayoutConstraint *orangeRedBottom = [NSLayoutConstraint constraintWithItem:redBox
+                                                                       attribute:NSLayoutAttributeBottom
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:orangeBoxLeft
+                                                                       attribute:NSLayoutAttributeRightMargin
+                                                                      multiplier:1
+                                                                        constant:8];
+    [self.view addConstraint:orangeRedBottom];
+    
+    NSLayoutConstraint *orangeRedTop = [NSLayoutConstraint constraintWithItem:redBox
+                                                                   attribute:NSLayoutAttributeTop
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:orangeBoxRight
+                                                                   attribute:NSLayoutAttributeTop
+                                                                  multiplier:1
+                                                                    constant:-8];
+    [self.view addConstraint:orangeRedTop];
+
+
+
 }
 
 /**
